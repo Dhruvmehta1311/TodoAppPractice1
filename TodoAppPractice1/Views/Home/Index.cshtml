@@ -1,0 +1,91 @@
+﻿@* @model List<TodoItems>; *@
+
+@* <!DOCTYPE html> *@
+@* <html lang="en"> *@
+@* <head> *@
+@*     <meta charset="UTF-8"> *@
+@*     <meta name="viewport" content="width=device-width, initial-scale=1.0"> *@
+@*     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> *@
+@*     <title>My Page</title> *@
+@* </head> *@
+@* <body> *@
+
+@*     <div class="text-white bg-gray-800 h-screen flex justify-center items-center w-full"> *@
+@*         <div class="bg-indigo-500 border border-black rounded-md p-10 w-[880px] max-w-[97%] flex flex-col gap-4"> *@
+
+@*             <form method="post" action="add" class="flex flex-col gap-4"> *@
+@*                 <input required placeholder="Add a Task.." class="border border-gray-300 rounded-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:border-blue-500" type="text" name="task" /> *@
+@*                 <button class="hover:bg-green-700 bg-green-600 px-6 py-1 rounded-md" type="submit">Add Todo</button> *@
+@*             </form> *@
+
+
+@*             <ul> *@
+@*                 @{ *@
+@*                     foreach (TodoItems task in Model) *@
+@*                     { *@
+@*                         <li>@task.ID.) @task.Task</li> *@
+@*                     } *@
+@*                 } *@
+@*             </ul> *@
+
+@*             <p>Current Date: @DateTime.Now.ToString("yyyy-MM-dd")</p> *@
+@*        </div> *@
+@*     </div> *@
+@* </body> *@
+@* </html> *@
+
+@model List<TodoItems>;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Todo App</title>
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen p-4">
+
+    <div class="bg-indigo-500 border border-black rounded-lg p-6 w-[880px] max-w-[97%] flex flex-col gap-6 shadow-lg">
+
+        <h1 class="text-white text-2xl font-bold text-center">📝 Todo List</h1>
+
+        <!-- Form -->
+        <form method="post" action="add" class="flex gap-3">
+            <input required placeholder="Add a Task..."
+                   class="border border-gray-300 rounded-md w-full py-2 px-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   type="text" name="task" />
+            <button class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-md text-white font-semibold"
+                    type="submit">
+                Add
+            </button>
+        </form>
+
+        <!-- Task List -->
+        <ul class="bg-white rounded-md p-4 shadow-md divide-y divide-gray-300">
+            @if (Model.Count > 0)
+            {
+                @foreach (TodoItems task in Model)
+                {
+                    <li class="py-3 flex justify-between items-center">
+                        <span class="text-gray-800 font-medium">@task.ID. @task.Task</span>
+                        <form action="delete/@task.ID">
+                            <button type="submit" class="text-sm text-red-500 hover:text-red-700">❌ Remove</button>
+                        </form>
+                    </li>
+                }
+            }
+            else
+            {
+                <p class="text-gray-700 text-center">No tasks yet. Add a new one!</p>
+            }
+        </ul>
+
+        <!-- Footer -->
+        <p class="text-white text-center text-sm">📅 Current Date: @DateTime.Now.ToString("yyyy-MM-dd")</p>
+
+    </div>
+
+</body>
+</html>
+
