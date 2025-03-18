@@ -12,7 +12,7 @@ namespace TodoAppPractice1.Controllers
         //    //new TodoItems() { ID = 3, Task = "Try to learn a new skill.", IsComplete = false }
         //};
 
-        private static int nextId = 0;
+        private static int nextId = 1;
 
         [Route("")]
         public IActionResult Index()
